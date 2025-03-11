@@ -1,0 +1,42 @@
+@API = http://localhost:8080/api
+
+### Create
+POST {{API}}/tarefa/
+Content-Type: application/json
+{
+  "titulo": "Nova Tarefa",
+  "descricao": "Descrição da tarefa",
+  "dataCriacao": "2024-01-10",
+  "dataConclusao": "2024-10-09",
+  "statusTarefa": "Pendente"
+}
+
+### Update
+PUT {{API}}/tarefa/
+Content-Type: application/json
+
+{
+  "id": 11,
+  "titulo": "Tarefa Atualizada",
+  "descricao": "Nova descrição",
+  "dataInicio": "2024-01-10",
+  "dataFim": "2024-10-12",
+  "status": "EmAndamento"
+}
+
+### GetAll
+GET {{API}}/tarefa/
+Accept: application/json
+
+### GetById
+GET {{API}}/tarefa/5
+Accept: application/json
+
+### GetPorPeriodo
+GET {{API}}/tarefa/periodo?data=2024-01-01&status=Concluida
+Accept: application/json
+
+### Delete
+DELETE {{API}}/tarefa/1
+Accept: application/json
+###

@@ -1,0 +1,13 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:9.0
+
+WORKDIR /src
+COPY . .
+
+# Install EF Core CLI
+RUN dotnet tool install --global dotnet-ef
+
+# Add global tools to PATH
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Run migrations
+CMD ["dotnet", "ef", "database", "update", "--startup-project", "YourTask.Presentation"]

@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="YourTask.Application.TarefaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YourTask.Application"
+        mc:Ignorable="d"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        Height="512" Width="850"
+        hc:BorderElement.CornerRadius="7"             
+        Background="White">
+    <StackPanel Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Cadastro Tarefa" Style="{StaticResource TextBlockTitle}" HorizontalAlignment="Left" Margin="10" />
+            <Button Command="{Binding FecharDialogCommand}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="0">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="12" Text="&#xE711;" />
+            </Button>
+            <hc:TextBox Grid.Column="1" Text="{Binding Id}" hc:TitleElement.Title="Código" HorizontalAlignment="Left" Width="130" Margin="0,0,0,0" IsReadOnly="True"
+                        Visibility="{Binding IndicaAlteracao, Converter={StaticResource Boolean2VisibilityConverter}}"/>
+            
+            <hc:TextBox Grid.Row="1" Text="{Binding Titulo}" hc:TitleElement.Title="Título" Margin="0,0,10,0"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="1">
+                <hc:ComboBox x:Name="cbStatus" hc:TitleElement.Title="Status" Width="130" Margin="0,0,10,0" 
+                             DisplayMemberPath="Value" 
+                             SelectedValuePath="Key" 
+                             SelectedValue="{Binding Status, Mode=TwoWay}"/>
+                <hc:TextBox hc:TitleElement.Title="Data Criação" Width="130" Margin="0,0,10,0" Text="{Binding DataCriacao}" IsReadOnly="True" />
+                <hc:DatePicker hc:TitleElement.Title="Data Conclusão" Width="130" SelectedDate="{Binding DataConclusao}" />
+            </StackPanel>
+            
+        </Grid>
+
+        <hc:TextBox Height="300" hc:TitleElement.Title="Descrição" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    AcceptsReturn="True" TextWrapping="Wrap"
+                    VerticalContentAlignment="Top"
+                    Margin="0,10" Text="{Binding Descricao}"/>
+
+        <Button 
+    x:Name="btnSalvar"
+    Command="{Binding SalvarCommand}"
+    HorizontalAlignment="Right"
+    Margin="15"
+    Padding="2"
+    Style="{StaticResource ButtonPrimary}"
+    Height="30"
+    Width="80">
+
+            <!-- Conteúdo do botão com indicador de carregamento -->
+            <Grid>
+                <!-- Texto padrão -->
+                <TextBlock 
+            x:Name="BtnText"
+            Text="Salvar"
+            Visibility="{Binding DataContext.BusyIndicator, 
+                       Converter={StaticResource Boolean2VisibilityReConverter}, 
+                       RelativeSource={RelativeSource AncestorType=Button}}"/>
+
+                <!-- Indicador de progresso -->
+                <hc:CircleProgressBar 
+            IsIndeterminate="True"
+            Width="20" 
+            Height="20" 
+            ArcThickness="2"
+            Style="{StaticResource ProgressBarSuccessCircle}"
+            Visibility="{Binding DataContext.BusyIndicator, 
+                       Converter={StaticResource Boolean2VisibilityConverter}, 
+                       RelativeSource={RelativeSource AncestorType=Button},
+                       FallbackValue=Collapsed}"/>
+            </Grid>
+        </Button>
+
+    </StackPanel>
+</UserControl>
