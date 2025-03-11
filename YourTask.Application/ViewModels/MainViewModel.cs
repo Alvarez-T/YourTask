@@ -35,7 +35,7 @@ public partial class MainViewModel : ObservableObject
         {
             var response = await _tarefaApi.GetAll();
 
-            if (!response.IsSuccessful && response.Content is null)
+            if (!response.IsSuccessful || response.Content is null)
                 return;
 
             Tarefas = new ObservableCollection<Tarefa>(response.Content);
@@ -63,7 +63,7 @@ public partial class MainViewModel : ObservableObject
 
             var response = await _tarefaApi.GetPorPeriodo(status, FiltroDataCriacao);
 
-            if (!response.IsSuccessful && response.Content is null)
+            if (!response.IsSuccessful || response.Content is null)
                 return;
 
             Tarefas = new ObservableCollection<Tarefa>(response.Content);
