@@ -19,7 +19,7 @@ public interface ITarefaApi
 
     [Get("/api/tarefa/periodo")]
     Task<IApiResponse<List<Tarefa>>> GetPorPeriodo(
-        [Query] int? statusTarefa = null,
+        [Query] int? status = null,
         [Query] DateTime? data = null
         );
 

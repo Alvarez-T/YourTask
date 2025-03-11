@@ -28,10 +28,10 @@ git clone https://github.com/Alvarez-T/YourTask.git
 cd YourTask
 docker-compose build
 docker-compose up migrations
-docker-compose up
+docker-compose up api
 ```
 
-### Método 2: copiar e colar no Prompt de comando (Necessário possuir SQL Server instalado)
+### Método 2: copiar e colar no Prompt de comando (Necessário possuir SQL Server instalado e ajustar connection string)
 
 ```#!/bin/bash
 git clone https://github.com/Alvarez-T/YourTask.git
